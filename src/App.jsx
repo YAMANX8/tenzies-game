@@ -11,6 +11,8 @@ export default function App() {
   const [isRunning, setIsRunning] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const [time, setTime] = useState(0);
+
+  const [rollTimes, setRollTimes] = useState(0);
   useEffect(() => {
     const allHeld = dice.every((die) => die.isHeld);
     const firstValue = dice[0].value;
@@ -44,9 +46,11 @@ export default function App() {
           return die.isHeld ? die : generateNewDie();
         })
       );
+      setRollTimes((oldTimes) => oldTimes + 1);
     } else {
       setTenzies(false);
       setTime(0);
+      setRollTimes(0);
       setIsRunning(true);
       setDice(allNewDice());
     }
@@ -84,7 +88,7 @@ export default function App() {
             current value between rolls.
           </p>
           <div className="game-status">
-            <div></div>
+            <div className="roll-times">{rollTimes}</div>
             <Timer isRunning={isRunning} time={time} setTime={setTime} />
           </div>
           <div className="dice-container">{diceElements}</div>

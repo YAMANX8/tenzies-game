@@ -74,7 +74,7 @@ main {
   }
 }
 
-.timer{
+.timer, .roll-times{
   display: inline-block;
   background-color: #9d35ff;
   color: white;
