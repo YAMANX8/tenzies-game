@@ -73,3 +73,22 @@ main {
 
   }
 }
+
+.timer{
+  display: inline-block;
+  background-color: #9d35ff;
+  color: white;
+  border-radius: 100px;
+  padding: 10px;
+  margin-bottom: 10px;
+  font-size: .9rem;
+  font-weight: 700;
+}
+.timer p{
+  margin: 0;
+}
+.game-status{
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}

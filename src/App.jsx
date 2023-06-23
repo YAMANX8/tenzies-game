@@ -1,18 +1,23 @@
 import Die from "./components/Die";
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 import { nanoid } from "nanoid";
 import Confetti from "react-confetti";
+import Timer from "./components/Timer";
 
 export default function App() {
   const [dice, setDice] = useState(allNewDice());
   const [tenzies, setTenzies] = useState(false);
 
+  const [isRunning, setIsRunning] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [time, setTime] = useState(0);
   useEffect(() => {
     const allHeld = dice.every((die) => die.isHeld);
     const firstValue = dice[0].value;
     const allSameValue = dice.every((die) => die.value === firstValue);
     if (allHeld && allSameValue) {
       setTenzies(true);
+      setIsRunning(false);
       console.log("You won!");
     }
   }, [dice]);
@@ -41,6 +46,8 @@ export default function App() {
       );
     } else {
       setTenzies(false);
+      setTime(0);
+      setIsRunning(true);
       setDice(allNewDice());
     }
   }
@@ -62,18 +69,34 @@ export default function App() {
     />
   ));
 
+  function handlePlayButton() {
+    setIsPlaying(true);
+    setIsRunning(true);
+  }
   return (
-    <main>
-      {tenzies && <Confetti />}
-      <h1 className="title">Tenzies</h1>
-      <p className="instructions">
-        Roll until all dice are the same. Click each die to freeze it at its
-        current value between rolls.
-      </p>
-      <div className="dice-container">{diceElements}</div>
-      <button className="roll-dice" onClick={rollDice}>
-        {tenzies ? "New Game" : "Roll"}
-      </button>
-    </main>
+    <>
+      {isPlaying ? (
+        <main>
+          {tenzies && <Confetti />}
+          <h1 className="title">Tenzies</h1>
+          <p className="instructions">
+            Roll until all dice are the same. Click each die to freeze it at its
+            current value between rolls.
+          </p>
+          <div className="game-status">
+            <div></div>
+            <Timer isRunning={isRunning} time={time} setTime={setTime} />
+          </div>
+          <div className="dice-container">{diceElements}</div>
+          <button className="roll-dice" onClick={rollDice}>
+            {tenzies ? "New Game" : "Roll"}
+          </button>
+        </main>
+      ) : (
+        <button className="play-btn" onClick={handlePlayButton}>
+          PLAY
+        </button>
+      )}
+    </>
   );
 }
