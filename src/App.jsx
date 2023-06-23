@@ -88,7 +88,7 @@ export default function App() {
             current value between rolls.
           </p>
           <div className="game-status">
-            <div className="roll-times">{rollTimes}</div>
+            <div className="roll-times">Rolls: {rollTimes}</div>
             <Timer isRunning={isRunning} time={time} setTime={setTime} />
           </div>
           <div className="dice-container">{diceElements}</div>
