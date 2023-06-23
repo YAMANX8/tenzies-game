@@ -102,4 +102,5 @@ main {
   cursor: pointer;
   border: none;
   outline: none;
+  box-shadow: 0 0 100px #59E391;
 }
