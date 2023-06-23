@@ -92,3 +92,14 @@ main {
   display: flex;
   justify-content: space-around;
 }
+.play-btn{
+  padding: 50px;
+  border-radius: 10px;
+  background-color: #59E391;
+  color: #fff;
+  font-size: 2rem;
+  font-weight: 700;
+  cursor: pointer;
+  border: none;
+  outline: none;
+}
